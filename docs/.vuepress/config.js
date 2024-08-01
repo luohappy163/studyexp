@@ -5,5 +5,5 @@ import { defineUserConfig } from 'vuepress'
 export default defineUserConfig({
   bundler: viteBundler(),
   theme: defaultTheme(),
-  base: '/home/ubuntu/app/www/',
+  dest: '/home/ubuntu/app/www/',
 })
