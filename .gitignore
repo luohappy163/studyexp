@@ -1,0 +1,4 @@
+# node_modules 默认临时文件目录
+node_modules
+.git
+pnpm-lock.yaml
