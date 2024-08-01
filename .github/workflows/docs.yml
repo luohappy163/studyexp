@@ -9,9 +9,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@master
- 
       - name: Setup SSH Keys
         uses: webfactory/ssh-agent@v0.9.0
         with:
