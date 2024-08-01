@@ -21,6 +21,6 @@ jobs:
         env:
           REMOTE_HOST: 43.142.71.248  # 你的服务器IP地址
           REMOTE_USER: ubuntu  # 你的服务器用户名
-          REMOTE_BRANCH: master  # 你想要部署的分支
+          REMOTE_BRANCH: master  
         run: |
           ssh $REMOTE_USER@$REMOTE_HOST "git clone -b $REMOTE_BRANCH git@github.com:$GITHUB_REPOSITORY.git /home/ubuntu/app && cd /home/ubuntu/app && pnpm docs:build"
