@@ -17,7 +17,7 @@ jobs:
         with:
           ssh-private-key: |
                ${{ secrets.SSH_PRIVATE_KEY }}
- 
+               
       - name: Deploy
         env:
           REMOTE_HOST: 43.142.71.248  # 你的服务器IP地址
