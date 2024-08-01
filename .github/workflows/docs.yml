@@ -1,18 +1,26 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push]
+name: Deploy to Server
+ 
+on:
+  push:
+    branches:
+      - master
+ 
 jobs:
-  Explore-GitHub-Actions:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - name: Check out repository code
-        uses: actions/checkout@v4
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
+      - name: Checkout Code
+        uses: actions/checkout@v2
+ 
+      - name: Setup SSH Keys
+        uses: webfactory/ssh-agent@v0.5.0
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+ 
+      - name: Deploy
+        env:
+          REMOTE_HOST: 43.142.71.248  # 你的服务器IP地址
+          REMOTE_USER: ubuntu  # 你的服务器用户名
+          REMOTE_BRANCH: master  # 你想要部署的分支
         run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+          ssh $REMOTE_USER@$REMOTE_HOST "git clone -b $REMOTE_BRANCH git@github.com:$GITHUB_REPOSITORY.git /home/ubuntu/app && cd /home/ubuntu/app && pnpm docs:build"
