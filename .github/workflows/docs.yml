@@ -10,17 +10,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@master
  
       - name: Setup SSH Keys
         uses: webfactory/ssh-agent@v0.9.0
-        env:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+        with:
+          ssh-private-key: |
+               ${{ secrets.SSH_PRIVATE_KEY }}
  
       - name: Deploy
         env:
           REMOTE_HOST: 43.142.71.248  # 你的服务器IP地址
           REMOTE_USER: ubuntu  # 你的服务器用户名
           REMOTE_BRANCH: master  
+     
         run: |
           ssh $REMOTE_USER@$REMOTE_HOST "git clone -b $REMOTE_BRANCH git@github.com:$GITHUB_REPOSITORY.git /home/ubuntu/app && cd /home/ubuntu/app && pnpm docs:build"
