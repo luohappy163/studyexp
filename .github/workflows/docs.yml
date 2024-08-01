@@ -25,4 +25,4 @@ jobs:
           REMOTE_BRANCH: master  
      
         run: |
-          ssh $REMOTE_USER@$REMOTE_HOST "git clone -b $REMOTE_BRANCH git@github.com:$GITHUB_REPOSITORY.git /home/ubuntu/app && cd /home/ubuntu/app && pnpm docs:build"
+          ssh 43.142.71.248@ubuntu "git clone -b $REMOTE_BRANCH git@github.com:$GITHUB_REPOSITORY.git /home/ubuntu/app && cd /home/ubuntu/app && pnpm docs:build"
